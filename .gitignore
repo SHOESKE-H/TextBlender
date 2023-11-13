@@ -40,3 +40,6 @@
 ./.idea
 ./.metadata
 ./.settings
+
+# Built Executable
+./build/TextBlender
