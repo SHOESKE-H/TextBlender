@@ -30,6 +30,7 @@ run:
 	./$(EXECUTABLE)
 
 rebrun:
+	make clean
 	make rebuild
 	make run
 
