@@ -29,4 +29,8 @@ rebuild:
 run:
 	./$(EXECUTABLE)
 
+rebrun:
+	make rebuild
+	make run
+
 .PHONY: clean
