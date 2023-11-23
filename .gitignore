@@ -35,11 +35,11 @@
 *.log
 
 # IDE-specific files
-./.vs
-./.vscode
-./.idea
-./.metadata
-./.settings
+.vs
+.vscode
+.idea
+.metadata
+.settings
 
 # Built Executable
 ./build/TextBlender
