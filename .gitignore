@@ -41,5 +41,5 @@
 .metadata
 .settings
 
-# Built Executable
-./build/TextBlender
+# Compiled files
+build
