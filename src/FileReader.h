@@ -124,6 +124,16 @@ public:
         m_file->clear();
     }
 
+    // \brief Returns a pointer to the file buffer that is associated with the input file stream.
+    // \details This function is used to get direct, low-level access to the input file buffer,
+    // which may be useful for advanced file operations.
+    // \returns A pointer to the file buffer (std::filebuf*). If the file has not been opened,
+    // this will point to a buffer that is not associated with any file.
+    std::filebuf* readBuffer()
+    {
+        return m_file->rdbuf();
+    }
+
 private:
     // \brief Check if the file is operable on
     // \throws `std::runtime_error` if `m_file` is bad
