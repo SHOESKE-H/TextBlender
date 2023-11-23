@@ -1,5 +1,5 @@
 CC := g++
-CFLAGS := -Wall -Wextra -g
+CFLAGS := -Wall -Wextra -Wpedantic -g
 LDFLAGS := -lsodium
 BUILD_DIR := build
 EXECUTABLE := $(BUILD_DIR)/TextBlender
