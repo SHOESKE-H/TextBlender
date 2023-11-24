@@ -9,11 +9,11 @@ public:
         Unknown,
         Whitespace,
         EndOfFile,
-    } TokenType;
+    } Type;
 
     PlaintextToken() noexcept
         : Token() {}
 
-    PlaintextToken(const TokenType &t_type, const std::string &t_value) noexcept
+    PlaintextToken(const Type &t_type, const std::string &t_value) noexcept
         : Token(t_type, t_value) {}
 };
