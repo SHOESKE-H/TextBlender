@@ -36,7 +36,7 @@ public:
     ~FileReader()
     {
         if (m_file && m_file->is_open())
-                m_file->close();
+            m_file->close();
     }
 
     // \returns Path of currently read file
@@ -122,7 +122,7 @@ public:
     {
         if (!m_file)
             throw std::runtime_error("File not existant.");
-        
+
         m_file->clear();
     }
 
@@ -131,18 +131,18 @@ public:
     // which may be useful for advanced file operations.
     // \returns A pointer to the file buffer (std::filebuf*). If the file has not been opened,
     // this will point to a buffer that is not associated with any file.
-    std::filebuf* readBuffer() const
+    std::filebuf *readBuffer() const
     {
         throwIfBadFile();
-        
+
         return m_file->rdbuf();
     }
 
-    // \brief Get current read position 
+    // \brief Get current read position
     std::streampos curPos() const
     {
         throwIfBadFile();
-        
+
         return m_file->tellg();
     }
 
