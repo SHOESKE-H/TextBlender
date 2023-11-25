@@ -120,6 +120,9 @@ public:
     // \brief Clear failbit
     void clear()
     {
+        if (!m_file)
+            throw std::runtime_error("File not existant.");
+        
         m_file->clear();
     }
 
@@ -130,12 +133,16 @@ public:
     // this will point to a buffer that is not associated with any file.
     std::filebuf* readBuffer() const
     {
+        throwIfBadFile();
+        
         return m_file->rdbuf();
     }
 
     // \brief Get current read position 
     std::streampos curPos() const
     {
+        throwIfBadFile();
+        
         return m_file->tellg();
     }
 
