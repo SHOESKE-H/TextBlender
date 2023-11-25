@@ -9,6 +9,8 @@ public:
         Unknown,
         Whitespace,
         EndOfFile,
+        Word,
+        Punctuation
     } Type;
 
     PlaintextToken() noexcept
