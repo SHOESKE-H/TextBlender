@@ -36,7 +36,7 @@ public:
 
     ~FileReader()
     {
-        if (m_file && m_file->is_open())
+        if (m_file)
         {
             if (m_file->is_open())
                 m_file->close();
