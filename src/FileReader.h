@@ -128,7 +128,7 @@ public:
     // which may be useful for advanced file operations.
     // \returns A pointer to the file buffer (std::filebuf*). If the file has not been opened,
     // this will point to a buffer that is not associated with any file.
-    std::filebuf* readBuffer()
+    std::filebuf* readBuffer() const
     {
         return m_file->rdbuf();
     }
@@ -142,7 +142,7 @@ public:
 private:
     // \brief Check if the file is operable on
     // \throws `std::runtime_error` if `m_file` is bad
-    void throwIfBadFile()
+    void throwIfBadFile() const
     {
         switch (fileState())
         {
@@ -174,7 +174,7 @@ private:
 
     // \brief Check if the eof bit is set
     // \throws `EofException` if the eof bit of `m_file` is set
-    void throwIfEof()
+    void throwIfEof() const
     {
         if (m_file->eof())
             throw EofException("Reached the end of file.");
