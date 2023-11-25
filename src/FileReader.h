@@ -133,6 +133,12 @@ public:
         return m_file->rdbuf();
     }
 
+    // \brief Get current read position 
+    std::streampos curPos() const
+    {
+        return m_file->tellg();
+    }
+
 private:
     // \brief Check if the file is operable on
     // \throws `std::runtime_error` if `m_file` is bad
