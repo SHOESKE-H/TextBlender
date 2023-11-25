@@ -146,6 +146,13 @@ public:
         return m_file->tellg();
     }
 
+    // \brief Look at next character
+    int peek() const
+    {
+        throwIfBadFile();
+        return m_file->peek();
+    }
+
 private:
     // \brief Check if the file is operable on
     // \throws `std::runtime_error` if `m_file` is bad
