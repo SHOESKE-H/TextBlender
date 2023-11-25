@@ -29,20 +29,15 @@ public:
         : m_filePath(), m_file(nullptr) {}
 
     FileReader(const std::string &t_fpath)
-        : m_filePath(t_fpath), m_file(new std::ifstream(t_fpath, std::ios::in))
+        : m_filePath(t_fpath), m_file(std::make_unique<std::ifstream>(std::ifstream(t_fpath, std::ios::in)))
     {
         throwIfBadFile();
     }
 
     ~FileReader()
     {
-        if (m_file)
-        {
-            if (m_file->is_open())
+        if (m_file && m_file->is_open())
                 m_file->close();
-
-            delete m_file;
-        }
     }
 
     // \returns Path of currently read file
@@ -94,7 +89,7 @@ public:
         throwIfEof();
 
         std::string line;
-        getline(*m_file, line);
+        getline(*m_file.get(), line);
         return line;
     }
 
@@ -181,7 +176,7 @@ private:
     }
 
     std::string m_filePath;
-    std::ifstream *m_file;
+    std::shared_ptr<std::ifstream> m_file;
 };
 
 #endif // FILEREADER_H
