@@ -36,8 +36,13 @@ public:
 
     ~FileReader()
     {
-        m_file->close();
-        delete m_file;
+        if (m_file && m_file->is_open())
+        {
+            if (m_file->is_open())
+                m_file->close();
+
+            delete m_file;
+        }
     }
 
     // \returns Path of currently read file
