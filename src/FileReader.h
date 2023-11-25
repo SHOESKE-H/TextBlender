@@ -5,7 +5,6 @@
 #include <fstream>
 #include <memory>
 #include <string>
-#include <vector>
 
 class EofException : public std::exception
 {
