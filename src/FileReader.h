@@ -1,5 +1,5 @@
-#ifndef FILEREADER_H
-#define FILEREADER_H
+#ifndef FILE_READER_H
+#define FILE_READER_H
 
 #include <exception>
 #include <fstream>
@@ -178,4 +178,4 @@ private:
     std::shared_ptr<std::ifstream> m_file;
 };
 
-#endif // FILEREADER_H
+#endif // FILE_READER_H
