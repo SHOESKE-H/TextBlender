@@ -9,6 +9,9 @@ public:
     Token() noexcept
         : m_type(0), m_value("") {}
 
+    Token(const size_t &t_type) noexcept
+        : m_type(t_type), m_value() {}
+
     Token(const size_t &t_type, const std::string &t_value) noexcept
         : m_type(t_type), m_value(t_value) {}
 
