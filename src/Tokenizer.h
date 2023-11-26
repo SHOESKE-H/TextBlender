@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <string>
 #include "Token.h"
 #include "FileReader.h"
 
@@ -12,8 +13,8 @@ public:
     Tokenizer() noexcept
         : m_fileReader(nullptr) {}
 
-    Tokenizer(const FileReader &t_fileReader) noexcept
-        : m_fileReader(t_fileReader) {}
+    Tokenizer(const std::string &t_fpath) noexcept
+        : m_fileReader(t_fpath) {}
 
     virtual std::vector<std::unique_ptr<Token>> tokenize() = 0;
 
