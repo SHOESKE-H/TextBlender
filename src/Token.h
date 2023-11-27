@@ -25,6 +25,16 @@ public:
         return m_value;
     }
 
+    void setType(const size_t &t_type) noexcept
+    {
+        m_type = t_type;
+    }
+
+    void setValue(const std::string &t_value) noexcept
+    {
+        m_value = t_value;
+    }
+
 private:
     size_t m_type; // Type 0 shall always be the 'Unknown' type
     std::string m_value;
