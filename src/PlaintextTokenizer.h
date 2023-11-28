@@ -18,7 +18,7 @@ public:
         : Tokenizer(t_fpath) {}
 
     // \brief Tokenize file into `PlaintextToken`s
-    std::vector<std::unique_ptr<Token>> tokenize() override
+    std::vector<std::shared_ptr<Token>> tokenize() override
     {
         // Check file state
         if (!m_fileReader.is_open())
@@ -26,14 +26,14 @@ public:
         else if (m_fileReader.bad())
             throw std::runtime_error("Bad file.");
 
-        std::vector<std::unique_ptr<Token>> tokens;
+        std::vector<std::shared_ptr<Token>> tokens;
 
         PlaintextToken curToken;
         while ((curToken = token()).type() != PlaintextToken::Type::EndOfFile)
-            tokens.push_back(std::make_unique<Token>(curToken));
+            tokens.push_back(std::make_shared<Token>(curToken));
 
         // Add final eof token
-        tokens.push_back(std::make_unique<Token>(curToken));
+        tokens.push_back(std::make_shared<Token>(curToken));
 
         return tokens;
     }

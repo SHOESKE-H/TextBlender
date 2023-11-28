@@ -16,7 +16,7 @@ public:
     Tokenizer(const std::string &t_fpath) noexcept
         : m_fileReader(t_fpath) {}
 
-    virtual std::vector<std::unique_ptr<Token>> tokenize() = 0;
+    virtual std::vector<std::shared_ptr<Token>> tokenize() = 0;
 
 protected:
     FileReader m_fileReader;
