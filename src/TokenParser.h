@@ -82,7 +82,7 @@ private:
     // \throws std::range_error if `m_readPtr` is out-of-range
     void throwIfOutOfRange() const
     {
-        if (m_readPtr + 1 > m_tokens.size())
+        if (m_readPtr >= m_tokens.size())
             throw std::range_error("Read pointer >= " + std::to_string(m_tokens.size()) + ".");
     }
 
