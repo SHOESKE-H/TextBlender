@@ -25,6 +25,13 @@ public:
         return m_readPtr;
     }
 
+    // \brief Check whether the read pointer has reached the end
+    // \brief True if the read pointer has reached the end, otherwise false
+    bool end() const
+    {
+        return m_readPtr >= m_tokens.size();
+    }
+
     // \brief Increment read pointer, return value before increment
     // \returns Read pointer before increment
     size_t ptrInc()
