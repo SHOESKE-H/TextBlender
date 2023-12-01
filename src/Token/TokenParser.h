@@ -52,7 +52,6 @@ public:
     size_t skip(const size_t &t_n)
     {
         m_readPtr += t_n;
-        throwIfOutOfRange();
 
         return m_readPtr;
     }
