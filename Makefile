@@ -1,5 +1,5 @@
 CC := g++
-CFLAGS := -Wall -Wextra -Wpedantic -g
+CFLAGS := -Wall -Wextra -Wpedantic -g $(shell find src -type d -printf '-I%p ')
 LDFLAGS := -lsodium
 BUILD_DIR := build
 EXECUTABLE := $(BUILD_DIR)/TextBlender
@@ -14,7 +14,7 @@ $(EXECUTABLE): $(OBJECTS)
 
 $(BUILD_DIR)/%.o: src/%.cpp | $(BUILD_DIR)
 	mkdir -p $(dir $@)
-	$(CC) -I src $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 build: $(EXECUTABLE)
 
