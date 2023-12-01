@@ -17,27 +17,23 @@ public:
 
     // \brief Increment read pointer, return value after increment
     // \returns Read pointer after increment
-    size_t incPtr()
+    size_t incPtr() noexcept
     {
-        m_readPtr++;
-
-        return m_readPtr;
+        return ++m_readPtr;
     }
 
     // \brief Check whether the read pointer has reached the end
     // \brief True if the read pointer has reached the end, otherwise false
-    bool end() const
+    bool end() const noexcept
     {
         return m_readPtr >= m_tokens.size();
     }
 
     // \brief Increment read pointer, return value before increment
     // \returns Read pointer before increment
-    size_t ptrInc()
+    size_t ptrInc() noexcept
     {
-        m_readPtr++;
-
-        return m_readPtr - 1;
+        return m_readPtr++;
     }
 
     // \brief Get position of read pointer
@@ -49,11 +45,9 @@ public:
     // \brief Skip tokens
     // \param t_n Number of tokens to skip
     // \returns Read pointer after applying the skip
-    size_t skip(const size_t &t_n)
+    size_t skip(const size_t &t_n) noexcept
     {
-        m_readPtr += t_n;
-
-        return m_readPtr;
+        return m_readPtr += t_n;
     }
 
     // \brief Get the next token
