@@ -20,7 +20,6 @@ public:
     size_t incPtr()
     {
         m_readPtr++;
-        throwIfOutOfRange();
 
         return m_readPtr;
     }
@@ -37,7 +36,6 @@ public:
     size_t ptrInc()
     {
         m_readPtr++;
-        throwIfOutOfRange();
 
         return m_readPtr - 1;
     }
