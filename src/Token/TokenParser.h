@@ -10,10 +10,10 @@ class TokenParser
 {
 public:
     TokenParser() noexcept
-        : m_readPtr(0), m_tokens() {}
+        : m_readPtr(0), m_failed(0), m_detectFail(0), m_tokens() {}
 
     TokenParser(const std::vector<std::shared_ptr<Token>> &t_tokens, const size_t &t_readPtr = 0, const size_t &t_detectFail = 0) noexcept
-        : m_readPtr(t_readPtr), m_detectFail(t_detectFail), m_tokens(t_tokens) {}
+        : m_readPtr(t_readPtr), m_failed(0), m_detectFail(t_detectFail), m_tokens(t_tokens) {}
 
     // \brief Returns failed number of tokens
     // \brief Failed number of tokens parsed so far
