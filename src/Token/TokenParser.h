@@ -12,8 +12,15 @@ public:
     TokenParser() noexcept
         : m_readPtr(0), m_tokens() {}
 
-    TokenParser(const std::vector<std::shared_ptr<Token>> &t_tokens, const size_t t_readPtr = 0) noexcept
-        : m_readPtr(t_readPtr), m_tokens(t_tokens) {}
+    TokenParser(const std::vector<std::shared_ptr<Token>> &t_tokens, const size_t &t_readPtr = 0, const size_t &t_detectFail = 0) noexcept
+        : m_readPtr(t_readPtr), m_detectFail(t_detectFail), m_tokens(t_tokens) {}
+
+    // \brief Returns failed number of tokens
+    // \brief Failed number of tokens parsed so far
+    size_t failed() const noexcept
+    {
+        return m_failed;
+    }
 
     // \brief Increment read pointer, return value after increment
     // \returns Read pointer after increment
@@ -64,6 +71,7 @@ public:
         throwIfOutOfRange();
 
         std::shared_ptr<Token> nextToken = token();
+        incFail(nextToken);
         incPtr();
         return nextToken;
     }
@@ -77,7 +85,16 @@ private:
             throw std::range_error("Read pointer >= " + std::to_string(m_tokens.size()) + ".");
     }
 
+    // \brief Check if `t_token` is equal to the set failed enum, and if it is, increment the failed counter
+    inline void incFail(const std::shared_ptr<Token> &t_token) noexcept
+    {
+        if (t_token->type() == m_detectFail)
+            m_failed++;
+    }
+
     size_t m_readPtr;
+    size_t m_failed;
+    size_t m_detectFail;
     std::vector<std::shared_ptr<Token>> m_tokens;
 };
 
