@@ -145,6 +145,35 @@ public:
         return m_readPtr;
     }
 
+    // \brief Get a specific token
+    // \param t_pos Position
+    // \param t_off Offset
+    // \returns Token at specified location
+    // \throws std::range_error if the location is not in-range
+    std::shared_ptr<Token> getToken(long long t_pos, const size_t &t_off = Position::Beg)
+    {
+        // Apply offset
+        switch (t_off)
+        {
+            case Position::Beg:
+                break;
+            
+            case Position::Cur:
+                t_pos += ptr();
+                break;
+            
+            case Position::End:
+                t_pos += size() - 1;
+                break;
+        }
+
+        // Check range
+        if (t_pos >= size())
+            throw std::range_error("Read pointer >= " + std::to_string(m_tokens.size()) + ".");
+        
+        return m_tokens.at(t_pos);
+    }
+
 private:
     // \brief Check if `m_readPtr` is in-range
     // \throws std::range_error if `m_readPtr` is out-of-range
