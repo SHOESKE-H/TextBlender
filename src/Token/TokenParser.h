@@ -90,6 +90,17 @@ public:
             throw std::out_of_range("Counter does not exist.");
     }
 
+    // \brief Set new tokens to be parsed
+    // \param t_tokens New tokens
+    // \note Does not reset counters
+    void setTokens(const std::vector<std::shared_ptr<Token>> &t_tokens)
+    {
+        m_tokens = t_tokens;
+
+        // Reset read pointer
+        m_readPtr = 0;
+    }
+
 private:
     // \brief Check if `m_readPtr` is in-range
     // \throws std::range_error if `m_readPtr` is out-of-range
@@ -107,7 +118,6 @@ private:
     }
 
     size_t m_readPtr;
-    size_t m_detectFail;
     std::vector<std::shared_ptr<Token>> m_tokens;
     std::unordered_map<size_t, size_t> m_counters;
 };
