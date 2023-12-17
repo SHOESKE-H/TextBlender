@@ -101,6 +101,11 @@ public:
         m_readPtr = 0;
     }
 
+    void clearTokens()
+    {
+        setTokens(std::vector<std::shared_ptr<Token>>());
+    }
+
 private:
     // \brief Check if `m_readPtr` is in-range
     // \throws std::range_error if `m_readPtr` is out-of-range
