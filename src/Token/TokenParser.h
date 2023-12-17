@@ -53,7 +53,7 @@ public:
     }
 
     // \brief Get the next token
-    std::shared_ptr<Token> token() const
+    std::shared_ptr<Token> token()
     {
         throwIfOutOfRange();
 
