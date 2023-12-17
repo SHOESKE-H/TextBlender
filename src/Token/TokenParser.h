@@ -168,7 +168,7 @@ public:
         }
 
         // Check range
-        if (t_pos >= size())
+        if (t_pos >= static_cast<long long int>(size()))
             throw std::range_error("Read pointer >= " + std::to_string(m_tokens.size()) + ".");
         
         return m_tokens.at(t_pos);
