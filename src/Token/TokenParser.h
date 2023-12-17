@@ -101,9 +101,17 @@ public:
         m_readPtr = 0;
     }
 
+    // \brief Clear tokens from RAM
     void clearTokens()
     {
         setTokens(std::vector<std::shared_ptr<Token>>());
+    }
+
+    // \brief Get size of total tokens currently being parsed
+    // \returns Size of total tokens
+    size_t size() const noexcept
+    {
+        return m_tokens.size();
     }
 
 private:
