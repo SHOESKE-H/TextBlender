@@ -20,7 +20,9 @@ public:
         return m_tp;
     }
 
-    virtual std::vector<std::shared_ptr<Token>> minify(const std::vector<std::shared_ptr<Token>> &t_tokens) = 0;
+    // \brief Minify tokens by reference
+    // \param t_tokens Tokens to be minified
+    virtual void minify(std::vector<std::shared_ptr<Token>> &t_tokens) = 0;
 
 protected:
     TokenParser m_tp;
