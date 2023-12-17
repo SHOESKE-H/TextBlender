@@ -140,7 +140,7 @@ public:
                 break;
             
             case Position::End:
-                m_readPtr = size() + t_pos;
+                m_readPtr = size() - 1 + t_pos;
         }
         return m_readPtr;
     }
