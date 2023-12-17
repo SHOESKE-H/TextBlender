@@ -114,6 +114,37 @@ public:
         return m_tokens.size();
     }
 
+    // \brief Offsets used by the seek member
+    typedef enum
+    {
+        Beg,
+        Cur,
+        End
+    } Position;
+
+    // \brief Seek to a position
+    // \param t_pos Position
+    // \param t_off Offset
+    // \returns Read pointer after seek
+    // \note Does not range-check the final position
+    size_t seek(const long long &t_pos, const size_t &t_off = Position::Beg) noexcept
+    {
+        switch (t_off)
+        {
+            case Position::Beg:
+                m_readPtr = t_pos;
+                break;
+            
+            case Position::Cur:
+                m_readPtr = m_readPtr + t_pos;
+                break;
+            
+            case Position::End:
+                m_readPtr = size() + t_pos;
+        }
+        return m_readPtr;
+    }
+
 private:
     // \brief Check if `m_readPtr` is in-range
     // \throws std::range_error if `m_readPtr` is out-of-range
