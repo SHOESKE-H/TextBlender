@@ -104,7 +104,7 @@ public:
     // \brief Clear tokens from RAM
     void clearTokens()
     {
-        setTokens(std::vector<std::shared_ptr<Token>>());
+        m_tokens.clear();
     }
 
     // \brief Get size of total tokens currently being parsed
