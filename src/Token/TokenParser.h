@@ -159,7 +159,7 @@ public:
                 break;
             
             case Position::Cur:
-                t_pos += ptr();
+                t_pos += ptr() - 1; // - 1 since we're immediately incrementing the read pointer in parseToken()
                 break;
             
             case Position::End:
