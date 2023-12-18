@@ -150,7 +150,7 @@ public:
     // \param t_off Offset
     // \returns Token at specified location
     // \throws std::range_error if the location is not in-range
-    std::shared_ptr<Token> getToken(long long t_pos, const size_t &t_off = Position::Beg)
+    std::shared_ptr<Token> get(long long t_pos, const size_t &t_off = Position::Beg)
     {
         // Apply offset
         switch (t_off)
