@@ -35,7 +35,7 @@ public:
         m_value = t_value;
     }
 
-private:
+protected:
     size_t m_type; // Type 0 shall always be the 'Unknown' type
     std::string m_value;
 };
