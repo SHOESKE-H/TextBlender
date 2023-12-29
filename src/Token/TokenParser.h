@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <exception>
+#include <stdexcept>
 #include <unordered_set>
 #include <unordered_map>
 #include "Token.h"
@@ -28,7 +29,7 @@ public:
     // \brief True if the read pointer has reached the end, otherwise false
     bool end() const noexcept
     {
-        return m_readPtr >= m_tokens.size();
+        return ptr() >= size();
     }
 
     // \brief Increment read pointer, return value before increment
@@ -57,7 +58,7 @@ public:
     {
         throwIfOutOfRange();
 
-        return m_tokens.at(m_readPtr);
+        return getToken(ptr());
     }
 
     // \brief Get the next token, increment read pointer
@@ -109,7 +110,7 @@ public:
 
     // \brief Get size of total tokens currently being parsed
     // \returns Size of total tokens
-    size_t size() const noexcept
+    virtual size_t size() const noexcept // Declared virtual so that when inherited classes call one of our functions, our functions will call their overridden size()
     {
         return m_tokens.size();
     }
@@ -118,7 +119,8 @@ public:
     typedef enum
     {
         Beg,
-        Cur,
+        Cur, // Read pointer
+        RecentToken, // Position of most recent token received
         End
     } Position;
 
@@ -129,20 +131,9 @@ public:
     // \note Does not range-check the final position
     size_t seek(const long long &t_pos, const size_t &t_off = Position::Beg) noexcept
     {
-        switch (t_off)
-        {
-            case Position::Beg:
-                m_readPtr = t_pos;
-                break;
-            
-            case Position::Cur:
-                m_readPtr = m_readPtr + t_pos;
-                break;
-            
-            case Position::End:
-                m_readPtr = size() - 1 + t_pos;
-        }
-        return m_readPtr;
+        m_readPtr = applyOffset(t_pos, t_off);
+        
+        return ptr();
     }
 
     // \brief Get a specific token
@@ -150,36 +141,57 @@ public:
     // \param t_off Offset
     // \returns Token at specified location
     // \throws std::range_error if the location is not in-range
-    std::shared_ptr<Token> get(long long t_pos, const size_t &t_off = Position::Beg)
+    std::shared_ptr<Token> get(const long long &t_pos, const size_t &t_off = Position::Beg)
     {
         // Apply offset
+        long long pos = applyOffset(t_pos, t_off);
+
+        // Check range
+        if (pos >= static_cast<long long int>(size()))
+            throw std::range_error("Read pointer >= " + std::to_string(m_tokens.size()) + ".");
+
+        return getToken(pos);
+    }
+
+protected:
+    // \brief Return a token in the token array without range-checking the position first
+    // \details Why? This makes it easier to inherit from this class
+    virtual std::shared_ptr<Token> getToken(const size_t &t_pos) const
+    {
+        return m_tokens.at(t_pos);
+    }
+    
+
+    long long applyOffset(const long long &t_pos, const size_t &t_off) const noexcept
+    {
+        long long fin = 0;
+        
         switch (t_off)
         {
             case Position::Beg:
+                fin = t_pos;
                 break;
             
             case Position::Cur:
-                t_pos += ptr() - 1; // - 1 since we're immediately incrementing the read pointer in parseToken()
-                break;
-            
-            case Position::End:
-                t_pos += size() - 1;
-                break;
-        }
+                fin = ptr() + t_pos - 1;
+                [[fallthrough]];
 
-        // Check range
-        if (t_pos >= static_cast<long long int>(size()))
-            throw std::range_error("Read pointer >= " + std::to_string(m_tokens.size()) + ".");
+            case Position::RecentToken:
+                fin--; // The read pointer is always one position ahead of the previously received token from the parseToken() member
+                break;
+
+            case Position::End:
+                fin = size() - 1 + t_pos;
+        }
         
-        return m_tokens.at(t_pos);
+        return fin;
     }
 
-private:
     // \brief Check if `m_readPtr` is in-range
     // \throws std::range_error if `m_readPtr` is out-of-range
     void throwIfOutOfRange() const
     {
-        if (m_readPtr >= m_tokens.size())
+        if (ptr() >= size())
             throw std::range_error("Read pointer >= " + std::to_string(m_tokens.size()) + ".");
     }
 
