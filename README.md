@@ -4,7 +4,7 @@
 A text minifier still well under development.
 
 ## Motivation
-I've got a pretty slow internet connection, so when I hit F12 on websites, all I can think about is how much faster the loading time would be if the HTML and CSS were also minified like the JS. Sure, the assets take the longest to load, but when it comes to my attention span, there's no time to spare.
+I've got a pretty slow internet connection, so when I hit F12 on websites, all I can think about is how much faster the loading times would be if the HTML and CSS were also minified like the JS. Sure, the assets take the longest to load, but when it comes to my attention span, there's no time to spare.
 
 This project aims to take care of that. 
 
