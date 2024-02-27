@@ -27,4 +27,4 @@ This project aims to take care of that.
 Then, in development, I noticed how dynamic everything was and the simplicity of adding another text type, so I thought it would be a waste only to use this for HTML and CSS specifically. That's why I hope to add support for other text types as well in the future.
 
 ## License
-Distributed under the MIT License. See [LICENSE](/LICENSE) for more information
+Distributed under the GPLv3 License. See [LICENSE](/LICENSE) for more information
